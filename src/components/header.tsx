@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 export async function Header() {
     return (
         <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
-            <div className="container mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-start gap-4 sm:gap-6">
+            <div className="container mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
                     <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group">
                         <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110">
