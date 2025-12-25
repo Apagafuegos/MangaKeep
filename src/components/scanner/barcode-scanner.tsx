@@ -1,6 +1,6 @@
 'use client'
 
-import { Html5QrcodeScanner } from 'html5-qrcode'
+import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode'
 import { useEffect, useRef } from 'react'
 
 interface BarcodeScannerProps {
@@ -24,7 +24,9 @@ export function BarcodeScanner({ onScanSuccess }: BarcodeScannerProps) {
                     fps: 10,
                     qrbox: { width: 250, height: 150 },
                     aspectRatio: 1.0,
-                    showTorchButtonIfSupported: true
+                    showTorchButtonIfSupported: true,
+                    rememberLastUsedCamera: true,
+                    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA]
                 },
                 /* verbose= */ false
             );
