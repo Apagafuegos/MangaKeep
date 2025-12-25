@@ -1,9 +1,10 @@
 import { getCollections } from '../actions/inventory'
 import Link from 'next/link'
-import { Library, ChevronRight } from 'lucide-react'
+import { Library } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { CreateCollectionDialog } from '@/components/collections/create-collection-dialog'
+import { Header } from '@/components/header'
 
 export default async function CollectionsPage() {
     const supabase = await createClient()
@@ -18,17 +19,7 @@ export default async function CollectionsPage() {
     return (
         <div className="min-h-screen bg-background pb-20">
             {/* Header */}
-            <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b transition-all duration-300">
-                <div className="container mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                        <Link href="/" className="hover:opacity-80 transition-all duration-200 hover:scale-105 truncate">
-                            <h1 className="text-base sm:text-xl font-bold tracking-tight">MangaKeep</h1>
-                        </Link>
-                        <ChevronRight className="text-muted-foreground flex-shrink-0" size={14} />
-                        <span className="font-semibold text-sm sm:text-base truncate">Collections</span>
-                    </div>
-                </div>
-            </header>
+            <Header />
 
             <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 space-y-4 sm:space-y-8">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 animate-in fade-in slide-in-from-top-2 duration-500">
