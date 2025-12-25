@@ -329,3 +329,58 @@ export async function createCollectionWithVolumes(name: string, volumeIds: strin
 
     revalidatePath('/collections')
 }
+
+export async function addVolumesToCollection(collectionId: string, volumeIds: string[]) {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) throw new Error('Unauthorized')
+
+    if (volumeIds.length > 0) {
+        const pivotRows = volumeIds.map(vid => ({
+            collection_id: collectionId,
+            user_volume_id: vid
+        }))
+
+        const { error } = await supabase
+            .from('collection_volumes')
+            .insert(pivotRows)
+
+        if (error) {
+            console.error('Error adding volumes to collection:', error)
+            throw new Error('Failed to add volumes to collection')
+        }
+    }
+
+    revalidatePath(`/collections/${collectionId}`)
+    revalidatePath('/collections')
+}
+
+export async function getVolumesAvailableForCollection(collectionId: string) {
+    const supabase = await createClient()
+
+    // 1. Get all user volumes
+    const { data: allVolumes, error: volumesError } = await supabase
+        .from('user_volumes')
+        .select(`
+            *,
+            manga_series (*)
+        `)
+        .order('created_at', { ascending: false })
+
+    if (volumesError) return []
+
+    // 2. Get volumes ALREADY in this collection
+    const { data: existingRelations, error: relationError } = await supabase
+        .from('collection_volumes')
+        .select('user_volume_id')
+        .eq('collection_id', collectionId)
+
+    if (relationError) return []
+
+    const existingIds = new Set(existingRelations.map(r => r.user_volume_id))
+
+    // 3. Filter
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return allVolumes.filter((vol: any) => !existingIds.has(vol.id))
+}

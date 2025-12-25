@@ -1,9 +1,10 @@
-import { getCollectionDetails } from '@/app/actions/inventory'
+import { getCollectionDetails, getVolumesAvailableForCollection } from '@/app/actions/inventory'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import { ChevronRight, Calendar, ArrowLeft } from 'lucide-react'
 import { redirect, notFound } from 'next/navigation'
 import { VolumeCard } from '@/components/dashboard/volume-card' // Reuse volume card? Yes, but maybe simpler list? Reuse for consistency.
+import { AddVolumesDialog } from '@/components/collections/add-volumes-dialog'
 
 export default async function CollectionDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -17,6 +18,7 @@ export default async function CollectionDetailsPage({ params }: { params: Promis
     if (!data) notFound()
 
     const { collection, volumes } = data
+    const availableVolumes = await getVolumesAvailableForCollection(id)
 
     return (
         <div className="min-h-screen bg-background pb-20">
@@ -37,16 +39,23 @@ export default async function CollectionDetailsPage({ params }: { params: Promis
             </header>
 
             <main className="container mx-auto px-4 py-8">
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold tracking-tight mb-2">{collection.name}</h1>
-                    <div className="flex items-center gap-4 text-muted-foreground text-sm">
-                        <span className="flex items-center gap-1">
-                            <Calendar size={14} />
-                            Created {new Date(collection.created_at).toLocaleDateString()}
-                        </span>
-                        <span>•</span>
-                        <span>{volumes.length} Volumes</span>
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h1 className="text-3xl font-bold tracking-tight mb-2">{collection.name}</h1>
+                        <div className="flex items-center gap-4 text-muted-foreground text-sm">
+                            <span className="flex items-center gap-1">
+                                <Calendar size={14} />
+                                Created {new Date(collection.created_at).toLocaleDateString()}
+                            </span>
+                            <span>•</span>
+                            <span>{volumes.length} Volumes</span>
+                        </div>
                     </div>
+
+                    <AddVolumesDialog
+                        collectionId={collection.id}
+                        availableVolumes={availableVolumes}
+                    />
                 </div>
 
                 {volumes.length === 0 ? (
