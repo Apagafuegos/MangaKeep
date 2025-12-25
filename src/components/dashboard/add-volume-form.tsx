@@ -96,35 +96,35 @@ export function AddVolumeForm() {
         return (
             <button
                 onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-sm"
+                className="flex items-center gap-1.5 sm:gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 w-full sm:w-auto justify-center"
                 type="button"
             >
-                <Plus size={18} />
+                <Plus size={16} className="sm:w-[18px] sm:h-[18px]" />
                 Add Volume
             </button>
         )
     }
 
     return (
-        <div className="bg-card border rounded-lg p-4 shadow-sm animate-in fade-in slide-in-from-top-2 w-full max-w-lg">
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold">Add New Volume</h3>
+        <div className="bg-card border rounded-lg p-3 sm:p-4 shadow-lg animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-300 w-full max-w-lg">
+            <div className="flex justify-between items-center mb-3 sm:mb-4">
+                <h3 className="font-semibold text-base sm:text-lg">Add New Volume</h3>
 
                 <button
                     type="button"
                     onClick={() => setShowScanner(!showScanner)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${showScanner
-                        ? 'bg-primary text-primary-foreground border-primary'
-                        : 'bg-background hover:bg-muted'
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-md text-xs font-medium border transition-all duration-200 ${showScanner
+                        ? 'bg-primary text-primary-foreground border-primary shadow-sm scale-105'
+                        : 'bg-background hover:bg-muted hover:scale-105'
                         }`}
                 >
                     {showScanner ? <X size={14} /> : <Camera size={14} />}
-                    {showScanner ? 'Close Scanner' : 'Scan'}
+                    {showScanner ? 'Close' : 'Scan'}
                 </button>
             </div>
 
             {showScanner && (
-                <div className="mb-4">
+                <div className="mb-3 sm:mb-4 animate-in fade-in slide-in-from-top-2 duration-300">
                     <BarcodeScanner onScanSuccess={handleScan} />
                 </div>
             )}
@@ -247,19 +247,19 @@ export function AddVolumeForm() {
                     </div>
                 </div>
 
-                <div className="flex justify-end gap-2 mt-2">
+                <div className="flex justify-end gap-2 mt-2 sm:mt-3">
                     <button
                         type="button"
                         onClick={() => { setIsOpen(false); resetForm(); }}
                         disabled={isPending}
-                        className="px-3 py-1.5 text-sm bg-muted text-muted-foreground rounded hover:bg-muted/80"
+                        className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm bg-muted text-muted-foreground rounded hover:bg-muted/80 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
                         disabled={isPending}
-                        className="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90"
+                        className="px-3 sm:px-4 py-1.5 sm:py-2 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
                     >
                         {isPending ? 'Adding...' : 'Save'}
                     </button>
