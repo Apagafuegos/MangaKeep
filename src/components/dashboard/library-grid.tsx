@@ -62,7 +62,7 @@ export function LibraryGrid({ initialVolumes }: LibraryGridProps) {
             setSelectedIds(new Set())
             setIsSelectMode(false)
             toast.success('Volumes deleted')
-        } catch (e) {
+        } catch {
             toast.error('Bulk delete failed')
         } finally {
             setIsBulkPending(false)
@@ -76,7 +76,7 @@ export function LibraryGrid({ initialVolumes }: LibraryGridProps) {
             setSelectedIds(new Set())
             setIsSelectMode(false)
             toast.success(`Marked as ${status}`)
-        } catch (e) {
+        } catch {
             toast.error('Bulk update failed')
         } finally {
             setIsBulkPending(false)
@@ -162,8 +162,8 @@ export function LibraryGrid({ initialVolumes }: LibraryGridProps) {
             ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                     {filteredVolumes.map((vol, index) => (
-                        <div 
-                            key={vol.id} 
+                        <div
+                            key={vol.id}
                             className="animate-in fade-in zoom-in-95 duration-300"
                             style={{ animationDelay: `${index * 30}ms` }}
                         >

@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 
 interface BarcodeScannerProps {
     onScanSuccess: (decodedText: string) => void
-    onScanFailure?: (error: any) => void
+    onScanFailure?: (error: unknown) => void
 }
 
 export function BarcodeScanner({ onScanSuccess }: BarcodeScannerProps) {
@@ -37,8 +37,8 @@ export function BarcodeScanner({ onScanSuccess }: BarcodeScannerProps) {
                     // Optional: Pause or clear if we only want one scan
                     // scanner.clear(); 
                 },
-                (errorMessage) => {
-                    // console.log("Scan error", errorMessage);
+                () => {
+                    // console.log("Scan error");
                 }
             );
 

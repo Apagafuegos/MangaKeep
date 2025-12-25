@@ -1,6 +1,6 @@
 import { getCollections } from '../actions/inventory'
 import Link from 'next/link'
-import { Library, Plus, ChevronRight } from 'lucide-react'
+import { Library, ChevronRight } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { CreateCollectionDialog } from '@/components/collections/create-collection-dialog'
@@ -49,6 +49,7 @@ export default async function CollectionsPage() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {collections.map((collection: any, index: number) => (
                             <Link
                                 key={collection.id}

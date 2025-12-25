@@ -1,7 +1,7 @@
 'use client'
 
 import { UserVolume, ReadingStatus } from '@/types'
-import { CheckCircle2, Circle, MoreVertical, Trash2, BookOpen, Library, Clock } from 'lucide-react'
+import { CheckCircle2, Circle, MoreVertical, Trash2, BookOpen, Library, LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import { deleteVolume, updateStatus } from '@/app/actions/inventory'
 import { useState } from 'react'
@@ -14,7 +14,7 @@ interface VolumeCardProps {
     onToggleSelect?: () => void
 }
 
-const statusConfig: Record<ReadingStatus, { icon: any, color: string, label: string }> = {
+const statusConfig: Record<ReadingStatus, { icon: LucideIcon, color: string, label: string }> = {
     unread: { icon: Circle, color: 'bg-black/40 text-white', label: 'Unread' },
     reading: { icon: BookOpen, color: 'bg-blue-500 text-white', label: 'Reading' },
     completed: { icon: CheckCircle2, color: 'bg-green-500 text-white', label: 'Completed' },
@@ -32,7 +32,7 @@ export function VolumeCard({ volume, isSelectMode, isSelected, onToggleSelect }:
             try {
                 await deleteVolume(volume.id)
                 toast.success('Volume deleted')
-            } catch (error) {
+            } catch {
                 toast.error('Failed to delete')
                 setIsDeleting(false)
             }
@@ -44,7 +44,7 @@ export function VolumeCard({ volume, isSelectMode, isSelected, onToggleSelect }:
             await updateStatus(volume.id, newStatus)
             setIsStatusOpen(false)
             toast.success(`Marked as ${newStatus}`)
-        } catch (error) {
+        } catch {
             toast.error('Failed to update status')
         }
     }

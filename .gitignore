@@ -40,3 +40,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# misc
+.crush
+
+# pwa
+public/sw.js
+public/workbox-*.js
+public/worker-*.js
+

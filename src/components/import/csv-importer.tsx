@@ -7,7 +7,7 @@ import { useState } from 'react'
 
 export function CsvImporter() {
     const [file, setFile] = useState<File | null>(null)
-    const [preview, setPreview] = useState<any[]>([])
+    const [preview, setPreview] = useState<Record<string, unknown>[]>([])
     const [isImporting, setIsImporting] = useState(false)
     const [result, setResult] = useState<{ success: number, failed: number, errors: string[] } | null>(null)
 
@@ -20,7 +20,7 @@ export function CsvImporter() {
                 preview: 5,
                 skipEmptyLines: true,
                 complete: (results) => {
-                    setPreview(results.data)
+                    setPreview(results.data as Record<string, unknown>[])
                     setResult(null)
                 }
             })
@@ -36,11 +36,12 @@ export function CsvImporter() {
             skipEmptyLines: true,
             complete: async (results) => {
                 try {
-                    const res = await importVolumes(results.data)
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const res = await importVolumes(results.data as Record<string, any>[])
                     setResult(res)
                     setFile(null)
                     setPreview([])
-                } catch (error) {
+                } catch {
                     alert('Import failed completely')
                 } finally {
                     setIsImporting(false)
@@ -83,8 +84,8 @@ export function CsvImporter() {
                                 <tbody>
                                     {preview.map((row, i) => (
                                         <tr key={i}>
-                                            {Object.values(row).slice(0, 4).map((c: any, j) => (
-                                                <td key={j} className="p-1 border-b opacity-80">{c}</td>
+                                            {Object.values(row).slice(0, 4).map((c: unknown, j) => (
+                                                <td key={j} className="p-1 border-b opacity-80">{String(c)}</td>
                                             ))}
                                         </tr>
                                     ))}

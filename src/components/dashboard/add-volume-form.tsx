@@ -42,7 +42,7 @@ export function AddVolumeForm() {
             toast.success('Volume added successfully')
             resetForm()
             setIsOpen(false)
-        } catch (error) {
+        } catch {
             toast.error('Failed to add volume')
         } finally {
             setIsPending(false)

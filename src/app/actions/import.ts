@@ -3,7 +3,8 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-export async function importVolumes(volumes: any[]) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function importVolumes(volumes: Record<string, any>[]) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
@@ -74,9 +75,10 @@ export async function importVolumes(volumes: any[]) {
             if (insertError) throw insertError
             results.success++
 
-        } catch (e: any) {
+        } catch (e: unknown) {
             results.failed++
-            results.errors.push(`Error importing ${vol.Title}: ${e.message}`)
+            const errorMessage = e instanceof Error ? e.message : String(e)
+            results.errors.push(`Error importing ${vol.Title}: ${errorMessage}`)
         }
     }
 

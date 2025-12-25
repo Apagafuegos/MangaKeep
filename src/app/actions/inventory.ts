@@ -267,6 +267,7 @@ export async function getCollectionDetails(id: string) {
     if (error) return null
 
     // Flatten structure
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const volumes = data.map((item: any) => item.user_volume).filter(Boolean)
 
     return { collection, volumes }
@@ -290,6 +291,7 @@ export async function getAllVolumesWithCollectionStatus() {
     }
 
     // Transform: Add 'isInCollection' flag
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return data.map((vol: any) => ({
         ...vol,
         isInCollection: vol.collection_volumes && vol.collection_volumes.length > 0

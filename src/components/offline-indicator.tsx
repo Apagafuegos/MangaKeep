@@ -21,7 +21,9 @@ export function OfflineIndicator() {
         window.addEventListener('offline', handleOffline)
 
         // Initial check
-        setIsOffline(!navigator.onLine)
+        if (!navigator.onLine) {
+            setTimeout(() => setIsOffline(true), 0)
+        }
 
         return () => {
             window.removeEventListener('online', handleOnline)

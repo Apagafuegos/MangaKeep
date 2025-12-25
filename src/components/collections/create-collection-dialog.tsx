@@ -57,7 +57,7 @@ export function CreateCollectionDialog() {
             setIsOpen(false)
             setName('')
             setSelectedIds(new Set())
-        } catch (error) {
+        } catch {
             toast.error('Failed to create collection')
         } finally {
             setIsPending(false)
@@ -85,8 +85,8 @@ export function CreateCollectionDialog() {
                         <Library size={18} className="sm:w-5 sm:h-5" />
                         Create Collection
                     </h2>
-                    <button 
-                        onClick={() => setIsOpen(false)} 
+                    <button
+                        onClick={() => setIsOpen(false)}
                         className="text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-110 p-1 rounded-full hover:bg-secondary"
                     >
                         <X size={18} className="sm:w-5 sm:h-5" />
@@ -135,7 +135,7 @@ export function CreateCollectionDialog() {
                                                 <h4 className="text-xs font-semibold text-muted-foreground mb-2 px-1 uppercase tracking-wider sticky top-0 bg-background/95 backdrop-blur py-1 z-10">Unassigned Volumes</h4>
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                                     {available.map((vol, index) => (
-                                                        <div 
+                                                        <div
                                                             key={vol.id}
                                                             className="animate-in fade-in zoom-in-95 duration-300"
                                                             style={{ animationDelay: `${index * 20}ms` }}
@@ -160,7 +160,7 @@ export function CreateCollectionDialog() {
                                                 </div>
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                                     {alreadyCollected.map((vol, index) => (
-                                                        <div 
+                                                        <div
                                                             key={vol.id}
                                                             className="animate-in fade-in zoom-in-95 duration-300"
                                                             style={{ animationDelay: `${index * 20}ms` }}

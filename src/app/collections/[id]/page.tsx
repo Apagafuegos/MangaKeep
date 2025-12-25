@@ -2,7 +2,6 @@ import { getCollectionDetails } from '@/app/actions/inventory'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import { ChevronRight, Calendar, ArrowLeft } from 'lucide-react'
-import Image from 'next/image'
 import { redirect, notFound } from 'next/navigation'
 import { VolumeCard } from '@/components/dashboard/volume-card' // Reuse volume card? Yes, but maybe simpler list? Reuse for consistency.
 
@@ -56,7 +55,7 @@ export default async function CollectionDetailsPage({ params }: { params: Promis
                     </div>
                 ) : (
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                        {volumes.map((vol: any) => (
+                        {volumes.map((vol) => (
                             <VolumeCard
                                 key={vol.id}
                                 volume={vol}
