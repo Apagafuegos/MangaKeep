@@ -1,19 +1,19 @@
-import { LoginForm } from '@/components/auth/login-form'
-import { OAuthButtons } from './oauth-buttons'
+import { SignupForm } from '@/components/auth/signup-form'
+import { OAuthButtons } from '@/app/login/oauth-buttons'
 import Link from 'next/link'
 import { Logo } from '@/components/logo'
 
-export default function LoginPage() {
+export default function SignupPage() {
     return (
         <div className="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
             {/* Left Panel - Branding */}
             <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r overflow-hidden">
                 <div className="absolute inset-0 bg-zinc-900" />
-                {/* Decorative Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-black opacity-80 z-10" />
+                {/* Decorative Gradient Overlay - Different text/vibe for signup? Keep consistent for now or shift hue */}
+                <div className="absolute inset-0 bg-gradient-to-bl from-primary/80 to-black opacity-80 z-10" />
 
-                {/* Background Watermark/Pattern */}
-                <div className="absolute -right-20 -bottom-40 opacity-10 z-0 pointer-events-none transform rotate-12">
+                {/* Background Watermark */}
+                <div className="absolute -left-20 -bottom-40 opacity-10 z-0 pointer-events-none transform -rotate-12">
                     <img src="/logo_icon.png" alt="" className="w-[600px] h-[600px] object-contain grayscale" />
                 </div>
 
@@ -25,7 +25,7 @@ export default function LoginPage() {
                 <div className="relative z-20 mt-auto">
                     <blockquote className="space-y-2">
                         <p className="text-lg">
-                            &ldquo;The perfect place to keep track of your manga collection across all your devices.&rdquo;
+                            &ldquo;Join the community and start organizing your manga journey today.&rdquo;
                         </p>
                     </blockquote>
                 </div>
@@ -44,10 +44,10 @@ export default function LoginPage() {
                         </div>
 
                         <h1 className="text-2xl font-semibold tracking-tight">
-                            Welcome back
+                            Create an account
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Enter your email to sign in to your account
+                            Enter your email below to create your account
                         </p>
                     </div>
 
@@ -64,15 +64,15 @@ export default function LoginPage() {
                         </div>
                     </div>
 
-                    <LoginForm />
+                    <SignupForm />
 
                     <p className="px-8 text-center text-sm text-muted-foreground">
-                        Don&apos;t have an account?{" "}
+                        Already have an account?{" "}
                         <Link
-                            href="/signup"
+                            href="/login"
                             className="underline underline-offset-4 hover:text-primary"
                         >
-                            Sign up
+                            Log in
                         </Link>
                     </p>
                 </div>
