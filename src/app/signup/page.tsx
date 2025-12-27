@@ -2,6 +2,8 @@ import { SignupForm } from '@/components/auth/signup-form'
 import { OAuthButtons } from '@/app/login/oauth-buttons'
 import Link from 'next/link'
 import { Logo } from '@/components/logo'
+import { Suspense } from 'react'
+import { Loader2 } from 'lucide-react'
 
 export default function SignupPage() {
     return (
@@ -64,7 +66,9 @@ export default function SignupPage() {
                         </div>
                     </div>
 
-                    <SignupForm />
+                    <Suspense fallback={<div className="h-40 flex items-center justify-center"><Loader2 className="animate-spin text-muted-foreground" /></div>}>
+                        <SignupForm />
+                    </Suspense>
 
                     <p className="px-8 text-center text-sm text-muted-foreground">
                         Already have an account?{" "}

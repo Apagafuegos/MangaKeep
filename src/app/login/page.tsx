@@ -2,6 +2,8 @@ import { LoginForm } from '@/components/auth/login-form'
 import { OAuthButtons } from './oauth-buttons'
 import Link from 'next/link'
 import { Logo } from '@/components/logo'
+import { Suspense } from 'react'
+import { Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
     return (
@@ -64,7 +66,9 @@ export default function LoginPage() {
                         </div>
                     </div>
 
-                    <LoginForm />
+                    <Suspense fallback={<div className="h-40 flex items-center justify-center"><Loader2 className="animate-spin text-muted-foreground" /></div>}>
+                        <LoginForm />
+                    </Suspense>
 
                     <p className="px-8 text-center text-sm text-muted-foreground">
                         Don&apos;t have an account?{" "}
