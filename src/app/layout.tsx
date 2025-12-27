@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "MangaKeep",
   description: "Track your manga collection offline.",
   manifest: "/manifest.json",
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export const viewport = {
